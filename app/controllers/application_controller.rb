@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
-  def index
-  end
+  include Clearance::Controller
+
+  def index; end
 end

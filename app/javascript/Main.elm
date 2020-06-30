@@ -2,7 +2,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser
 import Html exposing (..)
-import Html.Attributes exposing (src)
+import Html.Attributes exposing (href, src)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode
@@ -177,7 +177,7 @@ view : Model -> Html Msg
 view model =
     case model of
         ViewingGroups groups _ ->
-            div [] <| List.map viewGroup groups
+            div [] <| [ signInLink ] ++ List.map viewGroup groups
 
         ViewingMessages _ messages _ ->
             div [] <|
@@ -193,6 +193,12 @@ viewGroup group =
 viewMessage : Message -> Html Msg
 viewMessage message =
     div [] [ text <| Maybe.withDefault "" message.text ]
+
+
+signInLink : Html Msg
+signInLink =
+    a [ href "https://oauth.groupme.com/oauth/authorize?client_id=client_id" ]
+        [ text "Sign in to GroupMe" ]
 
 
 
