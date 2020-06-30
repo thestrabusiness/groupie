@@ -32,7 +32,7 @@ import Json.Decode.Pipeline
 
 
 type alias Flags =
-    { token : String, clientId : String }
+    { clientId : String }
 
 
 type Model
