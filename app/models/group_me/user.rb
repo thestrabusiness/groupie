@@ -1,13 +1,14 @@
 require 'net/http'
 
 module GroupMe
-  class User
-    def self.find(access_token)
-      uri = URI("https://api.groupme.com/v3/users/me?token=#{access_token}")
+  class User < Base
+    def find(access_token)
+      uri = URI(current_user_url(access_token))
       response = Net::HTTP.get_response(uri)
 
       if response.code == '200'
-        JSON.parse(response.body)['response']
+        self.data = JSON.parse(response.body)['response']
+        self
       end
     end
   end
