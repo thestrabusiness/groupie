@@ -1,24 +1,19 @@
-# README
+# Dependencies
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby 2.6.5
+* Rails 6.0.3.2
+* Elm 0.19.1
+* Postgres
 
-Things you may want to cover:
+# Running Locally
 
-* Ruby version
+Clone the repo and `bundle install` in the root directory
 
-* System dependencies
+`rails db:setup`
 
-* Configuration
+`yarn install` to setup webpack dependencies
 
-* Database creation
+`foreman start -f Procfile.dev` to run rails server and webpack-dev-server together
 
-* Database initialization
+Visit `localhost:3000` to see the application
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
