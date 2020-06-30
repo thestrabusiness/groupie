@@ -61,7 +61,6 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
-    byebug (11.1.3)
     clearance (2.1.0)
       actionmailer (>= 5.0)
       activemodel (>= 5.0)
@@ -191,7 +190,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
-  byebug
   clearance
   foreman
   jbuilder (~> 2.7)
