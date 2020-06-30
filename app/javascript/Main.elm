@@ -32,17 +32,29 @@ import Json.Decode.Pipeline
 
 
 type alias Flags =
-    { token : String }
+    { token : String, clientId : String }
 
 
 type Model
-    = ViewingGroups (List Group) ApiToken
-    | ViewingMessages String (List Message) ApiToken
+    = ViewingGroups (List Group) ApiConfig
+    | ViewingMessages String (List Message) ApiConfig
 
 
-init : ApiToken -> ( Model, Cmd Msg )
-init token =
-    ( ViewingGroups [] token, getGroups token )
+type ApiToken
+    = ApiToken String
+
+
+type ClientId
+    = ClientId String
+
+
+type alias ApiConfig =
+    { token : ApiToken, clientId : ClientId }
+
+
+init : ApiConfig -> ( Model, Cmd Msg )
+init config =
+    ( ViewingGroups [] config, getGroups config.token )
 
 
 type alias GroupMeResponse a =
@@ -98,18 +110,14 @@ type alias MentionData =
     { user_ids : List String }
 
 
-getToken : Model -> ApiToken
-getToken model =
+getConfig : Model -> ApiConfig
+getConfig model =
     case model of
-        ViewingGroups _ token ->
-            token
+        ViewingGroups _ config ->
+            config
 
-        ViewingMessages _ _ token ->
-            token
-
-
-type ApiToken
-    = ApiToken String
+        ViewingMessages _ _ config ->
+            config
 
 
 
@@ -127,8 +135,8 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     let
-        apiToken =
-            getToken model
+        config =
+            getConfig model
     in
     case msg of
         NoOp ->
@@ -137,7 +145,7 @@ update msg model =
         GotGroups result ->
             case result of
                 Ok { response } ->
-                    ( ViewingGroups response apiToken, Cmd.none )
+                    ( ViewingGroups response config, Cmd.none )
 
                 Err error ->
                     let
@@ -153,7 +161,7 @@ update msg model =
                         flippedMessages =
                             List.reverse response
                     in
-                    ( ViewingMessages groupId flippedMessages apiToken, Cmd.none )
+                    ( ViewingMessages groupId flippedMessages config, Cmd.none )
 
                 Err error ->
                     let
@@ -163,10 +171,10 @@ update msg model =
                     ( model, Cmd.none )
 
         UserSelectedGroup groupId ->
-            ( model, getMessages apiToken groupId )
+            ( model, getMessages config.token groupId )
 
         UserClickedBackToGroups ->
-            ( ViewingGroups [] apiToken, getGroups apiToken )
+            ( ViewingGroups [] config, getGroups config.token )
 
 
 
@@ -176,8 +184,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     case model of
-        ViewingGroups groups _ ->
-            div [] <| [ signInLink ] ++ List.map viewGroup groups
+        ViewingGroups groups config ->
+            div [] <| [ signInLink config.clientId ] ++ List.map viewGroup groups
 
         ViewingMessages _ messages _ ->
             div [] <|
@@ -195,9 +203,9 @@ viewMessage message =
     div [] [ text <| Maybe.withDefault "" message.text ]
 
 
-signInLink : Html Msg
-signInLink =
-    a [ href "https://oauth.groupme.com/oauth/authorize?client_id=client_id" ]
+signInLink : ClientId -> Html Msg
+signInLink (ClientId clientId) =
+    a [ href <| "https://oauth.groupme.com/oauth/authorize?client_id=" ++ clientId ]
         [ text "Sign in to GroupMe" ]
 
 
@@ -381,12 +389,12 @@ fileFromResponse =
 
 
 encodeTokenAndInit : Flags -> ( Model, Cmd Msg )
-encodeTokenAndInit { token } =
+encodeTokenAndInit { token, clientId } =
     let
-        encodedToken =
-            ApiToken token
+        apiConfg =
+            { token = ApiToken token, clientId = ClientId clientId }
     in
-    init encodedToken
+    init apiConfg
 
 
 main : Program Flags Model Msg

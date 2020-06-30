@@ -1,11 +1,9 @@
 import { Elm } from '../Main.elm';
 
-const { API_TOKEN } = process.env;
-
 document.addEventListener('DOMContentLoaded', () => {
   Elm.Main.init({
     node: document.getElementById('main'),
-    flags: { token: "token" }
+    flags: { token: process.env.API_TOKEN, clientId: process.env.CLIENT_ID  }
   });
 })
 
