@@ -36,7 +36,9 @@ type alias Flags =
 
 
 type Model
-    = ViewingGroups (List Group) ApiConfig
+    = Loading ApiConfig
+    | SignIn ApiConfig
+    | ViewingGroups (List Group) ApiConfig
     | ViewingMessages String (List Message) ApiConfig
 
 
@@ -49,12 +51,12 @@ type ClientId
 
 
 type alias ApiConfig =
-    { token : ApiToken, clientId : ClientId }
+    { clientId : ClientId, currentUser : Maybe CurrentUser }
 
 
 init : ApiConfig -> ( Model, Cmd Msg )
 init config =
-    ( ViewingGroups [] config, getGroups config.token )
+    ( Loading config, getCurrentUser )
 
 
 type alias GroupMeResponse a =
@@ -110,9 +112,21 @@ type alias MentionData =
     { user_ids : List String }
 
 
+type alias CurrentUser =
+    { name : String
+    , accessToken : ApiToken
+    }
+
+
 getConfig : Model -> ApiConfig
 getConfig model =
     case model of
+        SignIn config ->
+            config
+
+        Loading config ->
+            config
+
         ViewingGroups _ config ->
             config
 
@@ -128,6 +142,7 @@ type Msg
     = NoOp
     | GotGroups (Result Http.Error (GroupMeResponse (List Group)))
     | GotMessages String (Result Http.Error (GroupMeResponse (List Message)))
+    | GotCurrentUserResponse (Result Http.Error CurrentUser)
     | UserSelectedGroup String
     | UserClickedBackToGroups
 
@@ -137,6 +152,9 @@ update msg model =
     let
         config =
             getConfig model
+
+        currentUser =
+            config.currentUser
     in
     case msg of
         NoOp ->
@@ -170,11 +188,44 @@ update msg model =
                     in
                     ( model, Cmd.none )
 
+        GotCurrentUserResponse response ->
+            case response of
+                Ok currentUser_ ->
+                    let
+                        newConfig =
+                            { config | currentUser = Just currentUser_ }
+                    in
+                    case model of
+                        SignIn _ ->
+                            ( Loading newConfig, getGroups currentUser_.accessToken )
+
+                        Loading _ ->
+                            ( Loading newConfig, getGroups currentUser_.accessToken )
+
+                        ViewingGroups groups _ ->
+                            ( ViewingGroups groups newConfig, Cmd.none )
+
+                        ViewingMessages groupId messages _ ->
+                            ( ViewingMessages groupId messages newConfig, Cmd.none )
+
+                Err _ ->
+                    ( SignIn config, Cmd.none )
+
         UserSelectedGroup groupId ->
-            ( model, getMessages config.token groupId )
+            case currentUser of
+                Nothing ->
+                    ( SignIn config, Cmd.none )
+
+                Just { accessToken } ->
+                    ( Loading config, getMessages accessToken groupId )
 
         UserClickedBackToGroups ->
-            ( ViewingGroups [] config, getGroups config.token )
+            case currentUser of
+                Nothing ->
+                    ( SignIn config, Cmd.none )
+
+                Just { accessToken } ->
+                    ( Loading config, getGroups accessToken )
 
 
 
@@ -184,8 +235,14 @@ update msg model =
 view : Model -> Html Msg
 view model =
     case model of
-        ViewingGroups groups config ->
-            div [] <| [ signInLink config.clientId ] ++ List.map viewGroup groups
+        SignIn config ->
+            div [] [ signInLink config.clientId ]
+
+        Loading _ ->
+            div [] [ p [] [ text "Loading..." ] ]
+
+        ViewingGroups groups _ ->
+            div [] <| List.map viewGroup groups
 
         ViewingMessages _ messages _ ->
             div [] <|
@@ -211,6 +268,31 @@ signInLink (ClientId clientId) =
 
 
 ---- API ----
+
+
+getCurrentUser : Cmd Msg
+getCurrentUser =
+    Http.get
+        { url = "/sessions"
+        , expect = Http.expectJson GotCurrentUserResponse currentUserDecoder
+        }
+
+
+currentUserDecoder : Decoder CurrentUser
+currentUserDecoder =
+    succeed CurrentUser
+        |> required "name" string
+        |> required "access_token" apiTokenDecoder
+
+
+apiTokenDecoder : Decoder ApiToken
+apiTokenDecoder =
+    Decode.andThen decodeApiToken string
+
+
+decodeApiToken : String -> Decoder ApiToken
+decodeApiToken value =
+    succeed <| ApiToken value
 
 
 baseApiUrl : String
@@ -388,11 +470,13 @@ fileFromResponse =
 ---- PROGRAM ----
 
 
-encodeTokenAndInit : Flags -> ( Model, Cmd Msg )
-encodeTokenAndInit { token, clientId } =
+initWithConfig : Flags -> ( Model, Cmd Msg )
+initWithConfig { clientId } =
     let
         apiConfg =
-            { token = ApiToken token, clientId = ClientId clientId }
+            { clientId = ClientId clientId
+            , currentUser = Nothing
+            }
     in
     init apiConfg
 
@@ -401,7 +485,7 @@ main : Program Flags Model Msg
 main =
     Browser.element
         { view = view
-        , init = encodeTokenAndInit
+        , init = initWithConfig
         , update = update
         , subscriptions = always Sub.none
         }
