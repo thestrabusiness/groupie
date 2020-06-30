@@ -15,11 +15,5 @@ module GroupMe
 
       super
     end
-
-    private
-
-    def current_user_url(access_token)
-      "#{BASE_API_URL}/users/me?token=#{access_token}"
-    end
   end
 end
