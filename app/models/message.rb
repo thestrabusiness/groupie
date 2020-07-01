@@ -1,6 +1,8 @@
 class Message < ApplicationRecord
   before_save :update_favorites_count
 
+  scope :by_favorite_count, -> { order(favorites_count: :desc) }
+
   private
 
   def update_favorites_count
