@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  belongs_to :group
+
   before_save :update_favorites_count
 
   private
