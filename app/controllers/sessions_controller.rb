@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     user_data = GroupMe::User.new.find(access_token)
     user = find_or_create_user(user_data)
-    find_or_create_groups
+    find_or_create_groups(user)
 
     sign_in(user)
     redirect_to root_path
@@ -31,8 +31,9 @@ class SessionsController < ApplicationController
       )
   end
 
-  def find_or_create_groups
+  def find_or_create_groups(user)
     groups = GroupMe::FetchGroups.perform(access_token)
+    user.update(group_ids: groups.map(&:id))
     group_data = groups.map do |group|
       {
         id: group.id,
