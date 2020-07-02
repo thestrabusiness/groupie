@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [] do
     resources :messages, only: :index
+    resource :message_cache, only: [:create, :show]
     resources :most_liked_messages, only: :index
   end
 
