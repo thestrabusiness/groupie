@@ -25,7 +25,6 @@ class MessageCacheJob < ApplicationJob
         created_at: Time.at(message.created_at).to_datetime,
         updated_at: Time.at(message.updated_at).to_datetime
       }
-
     end
     Message.upsert_all(message_data)
   end
