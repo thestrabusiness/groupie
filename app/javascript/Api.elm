@@ -23,7 +23,11 @@ type ClientId
 
 
 type alias ApiConfig =
-    { navKey : Navigation.Key, clientId : ClientId, currentUser : Maybe CurrentUser }
+    { navKey : Navigation.Key
+    , clientId : ClientId
+    , currentUser : Maybe CurrentUser
+    , authenticityToken : String
+    }
 
 
 type alias GroupMeResponse a =

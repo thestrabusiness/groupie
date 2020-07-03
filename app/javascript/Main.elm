@@ -19,10 +19,6 @@ import Url exposing (Url)
 ---- MODEL ----
 
 
-type alias Flags =
-    { clientId : String }
-
-
 type Model
     = Loading ApiConfig
     | SignIn ApiConfig
@@ -246,13 +242,20 @@ decodeApiToken value =
 ---- PROGRAM ----
 
 
+type alias Flags =
+    { authenticityToken : String
+    , clientId : String
+    }
+
+
 initWithConfig : Flags -> Url -> Navigation.Key -> ( Model, Cmd Msg )
-initWithConfig { clientId } url navKey =
+initWithConfig { authenticityToken, clientId } url navKey =
     let
         apiConfg =
             { clientId = ClientId clientId
             , currentUser = Nothing
             , navKey = navKey
+            , authenticityToken = authenticityToken
             }
     in
     init apiConfg url
