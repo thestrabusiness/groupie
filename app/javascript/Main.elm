@@ -7,26 +7,8 @@ import Html exposing (..)
 import Html.Attributes exposing (href, src)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode as Decode
-    exposing
-        ( Decoder
-        , andThen
-        , field
-        , int
-        , list
-        , nullable
-        , oneOf
-        , string
-        , succeed
-        )
-import Json.Decode.Pipeline
-    exposing
-        ( custom
-        , hardcoded
-        , optional
-        , required
-        , requiredAt
-        )
+import Json.Decode as Decode exposing (Decoder, andThen, string, succeed)
+import Json.Decode.Pipeline exposing (required)
 import Page.GroupList as GroupList
 import Page.RecentMessages as RecentMessages
 import Route exposing (Route)
