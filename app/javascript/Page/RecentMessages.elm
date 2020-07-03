@@ -109,7 +109,9 @@ update msg model =
 view : Model -> Html Msg
 view { messages } =
     div [] <|
-        [ h1 [] [ a [ href "/groups" ] [ text "Back to groups" ] ] ]
+        [ h1 [] [ text "Recent Messages" ]
+        , h2 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
+        ]
             ++ List.map viewMessage messages
 
 

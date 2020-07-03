@@ -10,6 +10,7 @@ import Http
 import Json.Decode as Decode exposing (Decoder, andThen, string, succeed)
 import Json.Decode.Pipeline exposing (required)
 import Page.GroupList as GroupList
+import Page.MostLiked as MostLiked
 import Page.RecentMessages as RecentMessages
 import Route exposing (Route)
 import Url exposing (Url)
@@ -20,10 +21,12 @@ import Url exposing (Url)
 
 
 type Model
-    = Loading ApiConfig
+    = NotFound ApiConfig
+    | Loading ApiConfig
     | SignIn ApiConfig
     | GroupList GroupList.Model
     | RecentMessages RecentMessages.Model
+    | MostLiked MostLiked.Model
 
 
 init : ApiConfig -> Url -> ( Model, Cmd Msg )
@@ -41,6 +44,7 @@ type Msg
     | GotCurrentUserResponse (Maybe Route) (Result Http.Error CurrentUser)
     | GroupListMsg GroupList.Msg
     | RecentMessagesMsg RecentMessages.Msg
+    | MostLikedMsg MostLiked.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -56,7 +60,7 @@ update msg model =
         ( OnUrlRequest request, _ ) ->
             case request of
                 Browser.Internal url ->
-                    ( model, Cmd.none )
+                    ( model, Navigation.pushUrl config.navKey (Url.toString url) )
                         |> changeRouteTo (Route.fromUrl url)
 
                 Browser.External href ->
@@ -101,10 +105,23 @@ update msg model =
         ( RecentMessagesMsg _, _ ) ->
             ( model, Cmd.none )
 
+        ( MostLikedMsg mostLikedMsg, MostLiked mostLikedModel ) ->
+            let
+                ( newModel, newMsg ) =
+                    MostLiked.update mostLikedMsg mostLikedModel
+            in
+            ( MostLiked newModel, Cmd.map MostLikedMsg newMsg )
+
+        ( MostLikedMsg _, _ ) ->
+            ( model, Cmd.none )
+
 
 setApiConfig : ApiConfig -> Model -> Model
 setApiConfig config model =
     case model of
+        NotFound _ ->
+            NotFound config
+
         Loading _ ->
             Loading config
 
@@ -114,6 +131,9 @@ setApiConfig config model =
         RecentMessages pageModel ->
             RecentMessages { pageModel | config = config }
 
+        MostLiked pageModel ->
+            MostLiked { pageModel | config = config }
+
         SignIn _ ->
             SignIn config
 
@@ -121,6 +141,9 @@ setApiConfig config model =
 getApiConfig : Model -> ApiConfig
 getApiConfig model =
     case model of
+        NotFound config ->
+            config
+
         Loading config ->
             config
 
@@ -128,6 +151,9 @@ getApiConfig model =
             config
 
         RecentMessages { config } ->
+            config
+
+        MostLiked { config } ->
             config
 
         SignIn config ->
@@ -142,7 +168,7 @@ changeRouteTo route ( model, msg ) =
     in
     case route of
         Nothing ->
-            ( model, msg )
+            ( NotFound apiConfig, msg )
 
         Just Route.SignIn ->
             ( SignIn apiConfig, msg )
@@ -153,7 +179,7 @@ changeRouteTo route ( model, msg ) =
                     GroupList.init apiConfig
             in
             ( GroupList groupListModel
-            , Cmd.map GroupListMsg groupListMsg
+            , Cmd.batch [ msg, Cmd.map GroupListMsg groupListMsg ]
             )
 
         Just (Route.RecentMessages groupId) ->
@@ -166,7 +192,13 @@ changeRouteTo route ( model, msg ) =
             )
 
         Just (Route.MostLikedMessages groupId) ->
-            ( model, msg )
+            let
+                ( mostLikedModel, mostLikedMsg ) =
+                    MostLiked.init apiConfig groupId
+            in
+            ( MostLiked mostLikedModel
+            , Cmd.batch [ msg, Cmd.map MostLikedMsg mostLikedMsg ]
+            )
 
 
 
@@ -176,6 +208,16 @@ changeRouteTo route ( model, msg ) =
 view : Model -> Browser.Document Msg
 view model =
     case model of
+        NotFound _ ->
+            { title = "Page Not Found"
+            , body =
+                [ div []
+                    [ h1 [] [ text "Page Not Found" ]
+                    , a [ href "/" ] [ text "Go Home" ]
+                    ]
+                ]
+            }
+
         SignIn config ->
             { title = "Sign In"
             , body = [ div [] [ signInLink config.clientId ] ]
@@ -199,6 +241,14 @@ view model =
             , body =
                 [ RecentMessages.view pageModel
                     |> Html.map RecentMessagesMsg
+                ]
+            }
+
+        MostLiked pageModel ->
+            { title = "Most Liked Messages"
+            , body =
+                [ MostLiked.view pageModel
+                    |> Html.map MostLikedMsg
                 ]
             }
 

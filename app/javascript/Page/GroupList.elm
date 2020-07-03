@@ -64,7 +64,13 @@ view { groups } =
 
 viewGroup : Group -> Html Msg
 viewGroup group =
-    div [] [ h2 [] [ a [ href <| "/groups/" ++ group.id ++ "/messages" ] [ text group.name ] ] ]
+    div []
+        [ h2 [] [ text group.name ]
+        , a [ href <| "/groups/" ++ group.id ++ "/messages" ]
+            [ text "Recent Messages" ]
+        , a [ href <| "/groups/" ++ group.id ++ "/most_liked" ]
+            [ text "Most Liked Messages" ]
+        ]
 
 
 

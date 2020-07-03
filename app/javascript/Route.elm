@@ -27,4 +27,5 @@ urlParser =
         , Parser.map SignIn (s "sign_in")
         , Parser.map GroupList (s "groups")
         , Parser.map (RecentMessages << GroupId) (s "groups" </> string </> s "messages")
+        , Parser.map (MostLikedMessages << GroupId) (s "groups" </> string </> s "most_liked")
         ]

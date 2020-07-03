@@ -16,6 +16,14 @@ class MessageCache < ApplicationRecord
     ended_at.present? && ended_at <= Time.current
   end
 
+  def serialize
+    {
+      id: id,
+      started_at: started_at.to_i,
+      ended_at: ended_at&.to_i,
+    }
+  end
+
   private
 
   def start_time_not_in_future

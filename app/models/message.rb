@@ -5,6 +5,16 @@ class Message < ApplicationRecord
 
   scope :by_favorite_count, -> { order(favorites_count: :desc) }
 
+  def serialize
+    {
+      id: id,
+      created_at: created_at.to_i,
+      text: text,
+      avatar_url: avatar_url,
+      favorites_count: favorites_count
+    }
+  end
+
   private
 
   def update_favorites_count

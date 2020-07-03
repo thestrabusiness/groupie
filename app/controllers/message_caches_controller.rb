@@ -3,7 +3,7 @@ class MessageCachesController < ApplicationController
   before_action :require_group_membership
 
   def show
-    render json: MessageCache.where(group_id: group_id).last
+    render json: MessageCache.where(group_id: group_id).last&.serialize
   end
 
   def create
@@ -14,9 +14,9 @@ class MessageCachesController < ApplicationController
     )
 
     if message_cache.save
-      head :ok
+      render json: message_cache.serialize
     else
-      render json: message_cache.errors, status: :unprocessable_entity
+      render json: message_cache.errors.full_messages, status: :unprocessable_entity
     end
   end
 
