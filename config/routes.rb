@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'application#index'
+
   resource :sessions, only: :show
   get 'auth/callback', to: 'sessions#create'
 
@@ -8,5 +10,5 @@ Rails.application.routes.draw do
     resources :most_liked_messages, only: :index
   end
 
-  root to: 'application#index'
+  get '*destination', to: 'application#index'
 end
