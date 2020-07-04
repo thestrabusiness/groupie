@@ -1,4 +1,4 @@
-import { Elm } from '../Main.elm';
+import { Elm } from '../../elm/Main.elm';
 
 document.addEventListener('DOMContentLoaded', () => {
   const authenticityToken = document.getElementsByName('csrf-token')[0].content
