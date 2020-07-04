@@ -3,7 +3,7 @@ module Page.GroupList exposing (Model, Msg, init, update, view)
 import Api exposing (ApiConfig, ApiToken, GroupMeResponse)
 import Browser.Navigation as Navigation
 import Html exposing (..)
-import Html.Attributes exposing (href)
+import Html.Attributes exposing (class, href)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (Decoder, list, string, succeed)
@@ -59,17 +59,19 @@ update msg model =
 
 view : Model -> Html Msg
 view { groups } =
-    div [] <| List.map viewGroup groups
+    div [ class "group-list" ] <| List.map viewGroup groups
 
 
 viewGroup : Group -> Html Msg
 viewGroup group =
-    div []
+    div [ class "group-list__item" ]
         [ h2 [] [ text group.name ]
-        , a [ href <| "/groups/" ++ group.id ++ "/messages" ]
-            [ text "Recent Messages" ]
-        , a [ href <| "/groups/" ++ group.id ++ "/most_liked" ]
-            [ text "Most Liked Messages" ]
+        , div [ class "links" ]
+            [ a [ href <| "/groups/" ++ group.id ++ "/messages" ]
+                [ text "Recent Messages" ]
+            , a [ href <| "/groups/" ++ group.id ++ "/most_liked" ]
+                [ text "Most Liked Messages" ]
+            ]
         ]
 
 

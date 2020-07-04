@@ -1,0 +1,15 @@
+.group-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    .links {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        padding: 0.25rem;
+      }
+    }
+  }
+}
