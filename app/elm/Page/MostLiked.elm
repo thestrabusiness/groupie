@@ -2,7 +2,7 @@ module Page.MostLiked exposing (Model, Msg, init, update, view)
 
 import Api exposing (ApiConfig, ApiToken)
 import Html exposing (..)
-import Html.Attributes exposing (href)
+import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Http
 import Http.Detailed
@@ -104,9 +104,12 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ h1 [] [ text "Top 10 Messages Of All Time" ]
-        , h2 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
+    div [ class "message-list message-list__most-liked" ]
+        [ div [ class "message-list__header" ]
+            [ h2 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
+            , div [] []
+            ]
+        , h1 [] [ text "Top 10 Messages Of All Time" ]
         , viewMessageCache model.messageCache
         , viewMessages model.messages
         ]
@@ -175,9 +178,16 @@ viewMessages messages =
 
 viewMessage : Message -> Html Msg
 viewMessage message =
-    div []
-        [ div [] [ text <| Maybe.withDefault "" message.text ]
-        , div [] [ text <| String.fromInt message.favoritesCount ++ " likes" ]
+    div [ class "message" ]
+        [ div [ class "message__meta" ]
+            [ div [ class "message__avatar" ]
+                [ img [ src <| Maybe.withDefault "" message.avatarUrl ] [] ]
+            , div [ class "message__title" ] [ text "Sender name" ]
+            ]
+        , div [ class "message__body" ]
+            [ div [] [ text <| Maybe.withDefault "" message.text ]
+            , div [] [ text <| String.fromInt message.favoritesCount ++ " likes" ]
+            ]
         ]
 
 

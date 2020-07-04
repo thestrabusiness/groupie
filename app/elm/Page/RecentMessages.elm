@@ -2,7 +2,7 @@ module Page.RecentMessages exposing (Model, Msg, init, update, view)
 
 import Api exposing (ApiConfig, ApiToken, GroupMeResponse)
 import Html exposing (..)
-import Html.Attributes exposing (href)
+import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (Decoder, int, list, nullable, oneOf, string, succeed)
@@ -108,16 +108,28 @@ update msg model =
 
 view : Model -> Html Msg
 view { messages } =
-    div [] <|
-        [ h1 [] [ text "Recent Messages" ]
-        , h2 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
+    div [ class "message-list message-list__recent" ] <|
+        [ div [ class "message-list__header" ]
+            [ h3 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
+            , div [] []
+            ]
+        , h1 [] [ text "Recent Messages" ]
         ]
             ++ List.map viewMessage messages
 
 
 viewMessage : Message -> Html Msg
 viewMessage message =
-    div [] [ text <| Maybe.withDefault "" message.text ]
+    div [ class "message" ]
+        [ div [ class "message__meta" ]
+            [ div [ class "message__avatar" ]
+                [ img [ src <| Maybe.withDefault "" message.avatarUrl ] [] ]
+            , div [ class "message__title" ] [ text message.authorName ]
+            ]
+        , div [ class "message__body" ]
+            [ text <| Maybe.withDefault "" message.text
+            ]
+        ]
 
 
 
