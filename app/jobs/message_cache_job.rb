@@ -26,6 +26,7 @@ class MessageCacheJob < ApplicationJob
         user_id: message.user_id,
         avatar_url: message.avatar_url,
         text: message.text,
+        sender_name: message.name,
         favorited_by: message.favorited_by,
         favorites_count: message.favorited_by.size,
         attachments: message.attachments,
