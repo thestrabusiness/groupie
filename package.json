@@ -2,7 +2,8 @@
   "name": "groupme_app",
   "private": true,
   "scripts": {
-    "lint-elm": "./node_modules/.bin/elm-format --validate app/elm/"
+    "lint-elm": "./node_modules/.bin/elm-format --validate app/elm/",
+    "lint-scss": "yarn stylelint **/*.scss"
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -14,8 +15,11 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "elm-format": "^0.8.2",
     "elm-hot-webpack-loader": "^1.1.6",
-    "webpack-dev-server": "^3.11.0",
-    "elm-format": "^0.8.2"
+    "stylelint": "^13.5.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
