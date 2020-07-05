@@ -9,7 +9,5 @@ class AddSenderNameToMessages < ActiveRecord::Migration[6.0]
         SQL
       end
     end
-
-    change_column_null :messages, :sender_name, false
   end
 end

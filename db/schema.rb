@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_07_05_185217) do
     t.json "raw_message", default: {}, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "sender_name", null: false
+    t.string "sender_name"
     t.index ["group_id"], name: "index_messages_on_group_id"
     t.index ["system"], name: "index_messages_on_system"
     t.index ["user_id"], name: "index_messages_on_user_id"
