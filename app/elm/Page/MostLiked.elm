@@ -162,7 +162,7 @@ cacheStatusMessage maybeEndedAt =
     case maybeEndedAt of
         Just endedAt ->
             div []
-                [ div [] [ text <| "Last fetched at: " ++ posixToHoursAndMinutes endedAt ++ " UTC" ]
+                [ div [] [ text <| "Last fetched at: " ++ postToDateTime endedAt ++ " UTC" ]
                 , startCacheButton "Fetch again"
                 ]
 
@@ -197,7 +197,8 @@ viewMessage message =
             , div [ class "message__title" ] [ text message.senderName ]
             ]
         , div [ class "message__body" ] <|
-            [ div [] [ text <| Maybe.withDefault "" message.text ]
+            [ div [ class "message__title" ] [ text <| postToDateTime message.createdAt ]
+            , div [] [ text <| Maybe.withDefault "" message.text ]
             , div [] [ text <| String.fromInt message.favoritesCount ++ " likes" ]
             ]
                 ++ viewAttachments message.attachments
@@ -307,15 +308,61 @@ messageDecoder =
         |> required "attachments" (list attachmentDecoder)
 
 
-posixToHoursAndMinutes : Time.Posix -> String
-posixToHoursAndMinutes posix =
+postToDateTime : Time.Posix -> String
+postToDateTime posix =
     let
         zone =
             Time.utc
     in
-    (String.fromInt <| Time.toHour zone posix)
+    (englishMonthName <| Time.toMonth zone posix)
+        ++ " "
+        ++ (String.fromInt <| Time.toDay zone posix)
+        ++ " "
+        ++ (String.fromInt <| Time.toYear zone posix)
+        ++ " "
+        ++ (String.fromInt <| Time.toHour zone posix)
         ++ ":"
         ++ (String.padLeft 2 '0' <| String.fromInt <| Time.toMinute zone posix)
+
+
+englishMonthName : Time.Month -> String
+englishMonthName month =
+    case month of
+        Time.Jan ->
+            "January"
+
+        Time.Feb ->
+            "February"
+
+        Time.Mar ->
+            "March"
+
+        Time.Apr ->
+            "April"
+
+        Time.May ->
+            "May"
+
+        Time.Jun ->
+            "June"
+
+        Time.Jul ->
+            "July"
+
+        Time.Aug ->
+            "August"
+
+        Time.Sep ->
+            "September"
+
+        Time.Oct ->
+            "October"
+
+        Time.Nov ->
+            "November"
+
+        Time.Dec ->
+            "December"
 
 
 posixDecoder : Decoder Time.Posix
