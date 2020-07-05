@@ -6,7 +6,13 @@ class MostLikedMessagesController < ApplicationController
   def index
     if current_user.group_member?(group_id)
       limit = params[:limit] || 10
-      messages = Message.where(group_id: group_id).by_favorite_count.limit(limit)
+      offset = params[:offset] || 0
+      messages = Message
+        .where(group_id: group_id)
+        .by_favorite_count
+        .order(created_at: :asc)
+        .offset(offset)
+        .limit(limit)
 
       render json: messages.map(&:serialize)
     else

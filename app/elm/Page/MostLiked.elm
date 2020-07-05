@@ -26,11 +26,16 @@ type alias DetailedError =
     Http.Detailed.Error String
 
 
+pageSize =
+    50
+
+
 type alias Model =
     { config : ApiConfig
     , messageCache : Loadable (Maybe MessageCache)
     , messages : Loadable (List Message)
     , groupId : GroupId
+    , offset : Int
     }
 
 
@@ -67,8 +72,9 @@ init apiConfig groupId =
       , messages = Loading
       , messageCache = Loading
       , groupId = groupId
+      , offset = 0
       }
-    , Cmd.batch [ getMessages groupId, getMessageCache groupId ]
+    , Cmd.batch [ getMessages groupId 0 pageSize, getMessageCache groupId ]
     )
 
 
@@ -77,6 +83,7 @@ type Msg
     | UserClickedStartMessageCache
     | GotMessageCacheResponse (Result DetailedError ( Http.Metadata, Maybe MessageCache ))
     | GotCreateMessageCacheResponse (Result DetailedError ( Http.Metadata, Maybe MessageCache ))
+    | UserReachedBottom
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -85,7 +92,7 @@ update msg model =
         GotMessageResponse response ->
             case response of
                 Ok ( _, messages ) ->
-                    ( { model | messages = Success messages }, Cmd.none )
+                    ( appendNewMessages messages model, Cmd.none )
 
                 Err error ->
                     handleError error model
@@ -109,6 +116,27 @@ update msg model =
                 Err error ->
                     handleError error model
 
+        UserReachedBottom ->
+            let
+                newOffset =
+                    model.offset + pageSize
+            in
+            ( { model | offset = newOffset }, getMessages model.groupId newOffset pageSize )
+
+
+appendNewMessages : List Message -> Model -> Model
+appendNewMessages responseMessages model =
+    let
+        newMessages =
+            case model.messages of
+                Success existingMessages ->
+                    existingMessages ++ responseMessages
+
+                _ ->
+                    responseMessages
+    in
+    { model | messages = Success newMessages }
+
 
 
 ---- VIEW ----
@@ -126,6 +154,7 @@ view model =
             [ h1 [] [ text "Top 10 Messages Of All Time" ]
             , viewMessageCache model.messageCache
             , viewMessages model.messages
+            , button [ onClick UserReachedBottom ] [ text "Show More" ]
             ]
         ]
 
@@ -287,17 +316,23 @@ messageCacheDecoder =
         |> nullable
 
 
-getMessages : Route.GroupId -> Cmd Msg
-getMessages groupId =
+getMessages : Route.GroupId -> Int -> Int -> Cmd Msg
+getMessages groupId offset limit =
     Http.get
-        { url = mostLikedUrl groupId
+        { url = mostLikedUrl groupId offset limit
         , expect = Http.Detailed.expectJson GotMessageResponse messageListDecoder
         }
 
 
-mostLikedUrl : GroupId -> String
-mostLikedUrl (GroupId groupId) =
-    "/groups/" ++ groupId ++ "/most_liked_messages"
+mostLikedUrl : GroupId -> Int -> Int -> String
+mostLikedUrl (GroupId groupId) offset limit =
+    "/groups/"
+        ++ groupId
+        ++ "/most_liked_messages?"
+        ++ "offset="
+        ++ String.fromInt offset
+        ++ "&limit="
+        ++ String.fromInt limit
 
 
 messageListDecoder : Decoder (List Message)
