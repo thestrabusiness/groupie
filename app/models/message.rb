@@ -12,7 +12,8 @@ class Message < ApplicationRecord
       text: text,
       avatar_url: avatar_url,
       favorites_count: favorites_count,
-      sender_name: sender_name
+      sender_name: sender_name,
+      attachments: attachments
     }
   end
 

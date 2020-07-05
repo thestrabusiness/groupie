@@ -1,12 +1,22 @@
 module Page.MostLiked exposing (Model, Msg, init, update, view)
 
 import Api exposing (ApiConfig, ApiToken)
+import Attachment exposing (Attachment(..), attachmentDecoder)
 import Html exposing (..)
 import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Http
 import Http.Detailed
-import Json.Decode as Decode exposing (Decoder, bool, int, nullable, string, succeed)
+import Json.Decode as Decode
+    exposing
+        ( Decoder
+        , bool
+        , int
+        , list
+        , nullable
+        , string
+        , succeed
+        )
 import Json.Decode.Pipeline exposing (required)
 import Route exposing (GroupId(..))
 import Time
@@ -31,6 +41,7 @@ type alias Message =
     , avatarUrl : Maybe String
     , favoritesCount : Int
     , senderName : String
+    , attachments : List Attachment
     }
 
 
@@ -185,11 +196,39 @@ viewMessage message =
                 [ img [ src <| Maybe.withDefault "" message.avatarUrl ] [] ]
             , div [ class "message__title" ] [ text message.senderName ]
             ]
-        , div [ class "message__body" ]
+        , div [ class "message__body" ] <|
             [ div [] [ text <| Maybe.withDefault "" message.text ]
             , div [] [ text <| String.fromInt message.favoritesCount ++ " likes" ]
             ]
+                ++ viewAttachments message.attachments
         ]
+
+
+viewAttachments : List Attachment -> List (Html Msg)
+viewAttachments attachments =
+    List.map viewAttachment attachments
+
+
+viewAttachment : Attachment -> Html Msg
+viewAttachment attachment =
+    case attachment of
+        Image data ->
+            img [ src data.url ] []
+
+        Location data ->
+            div [] [ text "Location" ]
+
+        Split data ->
+            div [] [ text "Split" ]
+
+        Emoji data ->
+            div [] [ text "Emoji" ]
+
+        Mention data ->
+            div [] [ text "Mention" ]
+
+        File data ->
+            div [] [ text "File" ]
 
 
 noMessagesMessage : Html Msg
@@ -265,6 +304,7 @@ messageDecoder =
         |> required "avatar_url" (nullable string)
         |> required "favorites_count" int
         |> required "sender_name" string
+        |> required "attachments" (list attachmentDecoder)
 
 
 posixToHoursAndMinutes : Time.Posix -> String
