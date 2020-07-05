@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageCacheJob < ApplicationJob
   def perform(message_cache_id, access_token)
     message_cache = MessageCache.find(message_cache_id)
@@ -12,7 +14,8 @@ class MessageCacheJob < ApplicationJob
 
   def fetch_messages(access_token, group)
     if group.messages.present?
-      GroupMe::FetchMessagesSince.perform(access_token, group.id, group.last_message_id)
+      GroupMe::FetchMessagesSince.perform(access_token, group.id,
+                                          group.last_message_id)
     else
       GroupMe::FetchAllMessages.perform(access_token, group.id)
     end

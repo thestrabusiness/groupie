@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class MessageCache < ApplicationRecord
-  belongs_to :started_by, class_name: 'User'
+  belongs_to :started_by, class_name: "User"
   belongs_to :group
 
   validates :started_at, :started_by, :group, presence: true
@@ -20,7 +22,7 @@ class MessageCache < ApplicationRecord
     {
       id: id,
       started_at: started_at.to_i,
-      ended_at: ended_at&.to_i,
+      ended_at: ended_at&.to_i
     }
   end
 

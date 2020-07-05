@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageCachesController < ApplicationController
   before_action :require_login
   before_action :require_group_membership
@@ -23,9 +25,7 @@ class MessageCachesController < ApplicationController
   private
 
   def require_group_membership
-    unless current_user.group_member?(group_id)
-      head :unauthorized
-    end
+    head :unauthorized unless current_user.group_member?(group_id)
   end
 
   def group_id

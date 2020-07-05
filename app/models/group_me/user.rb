@@ -1,4 +1,6 @@
-require 'net/http'
+# frozen_string_literal: true
+
+require "net/http"
 
 module GroupMe
   class User < Base
@@ -6,8 +8,8 @@ module GroupMe
       uri = URI(current_user_url(access_token))
       response = Net::HTTP.get_response(uri)
 
-      if response.code == '200'
-        self.data = JSON.parse(response.body)['response']
+      if response.code == "200"
+        self.data = JSON.parse(response.body)["response"]
         self
       end
     end

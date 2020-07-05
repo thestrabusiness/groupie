@@ -1,4 +1,6 @@
-require 'net/http'
+# frozen_string_literal: true
+
+require "net/http"
 
 module GroupMe
   class FetchGroups < Base
@@ -10,8 +12,8 @@ module GroupMe
       uri = URI(groups_url(access_token, page))
       response = Net::HTTP.get_response(uri)
 
-      if response.code == '200'
-        group_data = JSON.parse(response.body)['response']
+      if response.code == "200"
+        group_data = JSON.parse(response.body)["response"]
 
         if group_data.empty?
           acc

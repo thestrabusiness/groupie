@@ -1,11 +1,13 @@
-require 'net/http'
+# frozen_string_literal: true
+
+require "net/http"
 
 module GroupMe
   class FetchMessagesSince < Base
     attr_accessor :group_id, :access_token
 
-    MESSAGE_LIMIT = 100.freeze
-    SLEEP_DURATION = 0.5.freeze
+    MESSAGE_LIMIT = 100
+    SLEEP_DURATION = 0.5
 
     def self.perform(access_token, group_id, after_id)
       new(access_token, group_id).perform(after_id, [])
@@ -20,8 +22,8 @@ module GroupMe
       uri = URI(messages_url(after_id))
       response = Net::HTTP.get_response(uri)
 
-      if response.code == '200'
-        message_data = JSON.parse(response.body)['response']
+      if response.code == "200"
+        message_data = JSON.parse(response.body)["response"]
 
         if message_data.empty?
           acc

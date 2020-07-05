@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module GroupMe
-  BASE_API_URL = "https://api.groupme.com/v3".freeze
+  BASE_API_URL = "https://api.groupme.com/v3"
 
   class Base
     attr_accessor :data

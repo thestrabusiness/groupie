@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MostLikedMessagesController < ApplicationController
   before_action :require_login
 
