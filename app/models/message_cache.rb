@@ -7,7 +7,7 @@ class MessageCache < ApplicationRecord
   validate :end_time_after_start_time
   validate :one_cache_per_day_per_group, on: :create
 
-  after_create :enqueue_cache_job
+  after_commit :enqueue_cache_job, on: :create
 
   scope :for_last_day, -> { where("started_at >= ?", 24.hours.ago) }
   scope :running, -> { where(ended_at: nil) }

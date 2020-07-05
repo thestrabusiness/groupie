@@ -9,7 +9,7 @@ module GroupMe
     end
 
     def method_missing(method, *args, &block)
-      if data.keys.include?(method.to_s)
+      if data.respond_to?(:keys) && data.keys.include?(method.to_s)
         return data[method.to_s]
       end
 

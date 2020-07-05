@@ -1,24 +1,23 @@
 require 'net/http'
 
 module GroupMe
-  class FetchMessages < Base
-    attr_accessor :group_id, :after_id, :access_token
+  class FetchMessagesSince < Base
+    attr_accessor :group_id, :access_token
 
     MESSAGE_LIMIT = 100.freeze
     SLEEP_DURATION = 0.5.freeze
 
-    def self.perform(access_token, group_id, after_id = nil)
-      new(access_token, group_id, after_id).perform(1, [])
+    def self.perform(access_token, group_id, after_id)
+      new(access_token, group_id).perform(after_id, [])
     end
 
-    def initialize(access_token, group_id, after_id)
+    def initialize(access_token, group_id)
       @group_id = group_id
-      @after_id = after_id
       @access_token = access_token
     end
 
-    def perform(page, acc = [])
-      uri = URI(messages_url(page))
+    def perform(after_id, acc = [])
+      uri = URI(messages_url(after_id))
       response = Net::HTTP.get_response(uri)
 
       if response.code == '200'
@@ -28,21 +27,22 @@ module GroupMe
           acc
         else
           messages = message_data.map { |message| Message.new(message) }
+          next_after_id = messages.first.id
           sleep SLEEP_DURATION
-          perform(page + 1, acc + messages)
+          perform(next_after_id, acc + messages)
         end
       end
     end
 
     private
 
-    def messages_url(page)
+    def messages_url(after_id)
       [
-        "#{BASE_API_URL}/groups/#{group_id}/messages?page=#{page}",
+        "#{BASE_API_URL}/groups/#{group_id}/messages?",
         token_param,
         limit_param,
-        after_id_param
-      ].reject(&:empty?).join("&")
+        after_id_param(after_id)
+      ].join("&")
     end
 
     def token_param
@@ -53,8 +53,8 @@ module GroupMe
       "limit=#{MESSAGE_LIMIT}"
     end
 
-    def after_id_param
-      after_id.present? ? "after_id=#{after_id}" : ""
+    def after_id_param(after_id)
+      "after_id=#{after_id}"
     end
   end
 end
