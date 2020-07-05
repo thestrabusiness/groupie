@@ -30,6 +30,7 @@ type alias Message =
     , text : Maybe String
     , avatarUrl : Maybe String
     , favoritesCount : Int
+    , senderName : String
     }
 
 
@@ -182,7 +183,7 @@ viewMessage message =
         [ div [ class "message__meta" ]
             [ div [ class "message__avatar" ]
                 [ img [ src <| Maybe.withDefault "" message.avatarUrl ] [] ]
-            , div [ class "message__title" ] [ text "Sender name" ]
+            , div [ class "message__title" ] [ text message.senderName ]
             ]
         , div [ class "message__body" ]
             [ div [] [ text <| Maybe.withDefault "" message.text ]
@@ -263,6 +264,7 @@ messageDecoder =
         |> required "text" (nullable string)
         |> required "avatar_url" (nullable string)
         |> required "favorites_count" int
+        |> required "sender_name" string
 
 
 posixToHoursAndMinutes : Time.Posix -> String

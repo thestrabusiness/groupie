@@ -11,7 +11,8 @@ class Message < ApplicationRecord
       created_at: created_at.to_i,
       text: text,
       avatar_url: avatar_url,
-      favorites_count: favorites_count
+      favorites_count: favorites_count,
+      sender_name: sender_name
     }
   end
 
