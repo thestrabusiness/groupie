@@ -40,7 +40,7 @@ type alias Message =
     , text : Maybe String
     , avatarUrl : Maybe String
     , favoritesCount : Int
-    , senderName : String
+    , senderName : Maybe String
     , attachments : List Attachment
     }
 
@@ -194,7 +194,8 @@ viewMessage message =
         [ div [ class "message__meta" ]
             [ div [ class "message__avatar" ]
                 [ img [ src <| Maybe.withDefault "" message.avatarUrl ] [] ]
-            , div [ class "message__title" ] [ text message.senderName ]
+            , div [ class "message__title" ]
+                [ text <| Maybe.withDefault "GroupMe" message.senderName ]
             ]
         , div [ class "message__body" ] <|
             [ div [ class "message__title" ] [ text <| postToDateTime message.createdAt ]
@@ -304,7 +305,7 @@ messageDecoder =
         |> required "text" (nullable string)
         |> required "avatar_url" (nullable string)
         |> required "favorites_count" int
-        |> required "sender_name" string
+        |> required "sender_name" (nullable string)
         |> required "attachments" (list attachmentDecoder)
 
 
