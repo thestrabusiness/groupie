@@ -3,16 +3,19 @@ module Page.GroupList exposing (Model, Msg, init, update, view)
 import Api exposing (ApiConfig, ApiToken, GroupMeResponse)
 import Browser.Navigation as Navigation
 import Html exposing (..)
-import Html.Attributes exposing (class, href)
+import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode as Decode exposing (Decoder, list, string, succeed)
+import Json.Decode as Decode exposing (Decoder, list, nullable, string, succeed)
 import Json.Decode.Pipeline exposing (required)
 import Route exposing (GroupId(..))
 
 
 type alias Group =
-    { id : String, name : String }
+    { id : String
+    , name : String
+    , imageUrl : Maybe String
+    }
 
 
 type alias Model =
@@ -65,7 +68,8 @@ view { groups } =
 viewGroup : Group -> Html Msg
 viewGroup group =
     div [ class "group-list__item" ]
-        [ h2 [] [ text group.name ]
+        [ img [ src <| imageWithDefault group.imageUrl ] []
+        , h2 [] [ text group.name ]
         , div [ class "links" ]
             [ a [ href <| "/groups/" ++ group.id ++ "/messages" ]
                 [ text "Recent Messages" ]
@@ -73,6 +77,11 @@ viewGroup group =
                 [ text "Most Liked Messages" ]
             ]
         ]
+
+
+imageWithDefault : Maybe String -> String
+imageWithDefault =
+    Maybe.withDefault "https://i.groupme.com/300x300.png.e8ec5793a332457096bc9707ffc9ac37"
 
 
 
@@ -92,6 +101,7 @@ groupDecoder =
     succeed Group
         |> required "id" string
         |> required "name" string
+        |> required "image_url" (nullable string)
 
 
 groupListDecoder : Decoder (GroupMeResponse (List Group))

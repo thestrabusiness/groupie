@@ -196,7 +196,7 @@ viewMessage message =
     div [ class "message" ]
         [ div [ class "message__meta" ]
             [ div [ class "message__avatar" ]
-                [ img [ src <| Maybe.withDefault "" message.avatarUrl ] [] ]
+                [ img [ src <| imageWithDefault message.avatarUrl ] [] ]
             , div [ class "message__title" ]
                 [ text <| Maybe.withDefault "GroupMe" message.senderName ]
             ]
@@ -207,6 +207,11 @@ viewMessage message =
             ]
                 ++ viewAttachments message.attachments
         ]
+
+
+imageWithDefault : Maybe String -> String
+imageWithDefault =
+    Maybe.withDefault "https://i.groupme.com/300x300.png.6485c42fdeaa45b5a4b986b9cb1c91a2"
 
 
 viewAttachments : List Attachment -> List (Html Msg)
