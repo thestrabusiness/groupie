@@ -14,6 +14,8 @@ Clone the repo and `bundle install` in the root directory
 
 `yarn install` to setup webpack dependencies
 
+`cp .env.example .env` and fill in with your ENV variables
+
 `foreman start -f Procfile.dev` to run rails server and webpack-dev-server together
 
 Visit `localhost:3000` to see the application
