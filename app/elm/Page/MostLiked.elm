@@ -121,9 +121,12 @@ view model =
             [ h2 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
             , div [] []
             ]
-        , h1 [] [ text "Top 10 Messages Of All Time" ]
-        , viewMessageCache model.messageCache
-        , viewMessages model.messages
+        , div
+            [ class "message-list__content" ]
+            [ h1 [] [ text "Top 10 Messages Of All Time" ]
+            , viewMessageCache model.messageCache
+            , viewMessages model.messages
+            ]
         ]
 
 

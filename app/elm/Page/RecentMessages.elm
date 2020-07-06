@@ -81,9 +81,11 @@ view { messages } =
             [ h3 [] [ a [ href "/groups" ] [ text "Back to groups" ] ]
             , div [] []
             ]
-        , h1 [] [ text "Recent Messages" ]
+        , div [ class "message-list__content" ] <|
+            [ h1 [] [ text "Recent Messages" ]
+            ]
+                ++ List.map viewMessage messages
         ]
-            ++ List.map viewMessage messages
 
 
 viewMessage : Message -> Html Msg

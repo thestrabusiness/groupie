@@ -2,11 +2,18 @@
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  padding: 0 5rem;
 
   &__header {
+    background-color: #e5f1f6;
     display: flex;
     justify-content: space-between;
+    padding: 0 5rem;
+  }
+
+  &__content {
+    margin: 0 auto;
+    padding: 0 5rem;
+    width: 1024px;
   }
 
   .message {
