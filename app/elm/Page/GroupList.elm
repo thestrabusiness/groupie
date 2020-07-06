@@ -3,7 +3,7 @@ module Page.GroupList exposing (Model, Msg, init, update, view)
 import Api exposing (ApiConfig, ApiToken, GroupMeResponse)
 import Browser.Navigation as Navigation
 import Html exposing (..)
-import Html.Attributes exposing (class, href, src)
+import Html.Attributes exposing (class, href, method, src)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode as Decode exposing (Decoder, list, nullable, string, succeed)
@@ -26,6 +26,8 @@ type alias Model =
 
 type Msg
     = GotGroups (Result Http.Error (GroupMeResponse (List Group)))
+    | UserClickedSignOut
+    | GotSignOutResponse (Result Http.Error ())
 
 
 
@@ -55,6 +57,28 @@ update msg model =
                 Err _ ->
                     ( model, Cmd.none )
 
+        UserClickedSignOut ->
+            ( model, signOut model.config )
+
+        GotSignOutResponse result ->
+            case result of
+                Ok _ ->
+                    let
+                        config =
+                            model.config
+
+                        newConfig =
+                            { config | currentUser = Nothing }
+                    in
+                    ( { model | config = newConfig }
+                    , Navigation.pushUrl
+                        config.navKey
+                        "/"
+                    )
+
+                Err _ ->
+                    ( model, Cmd.none )
+
 
 
 ---- VIEW ----
@@ -62,7 +86,12 @@ update msg model =
 
 view : Model -> Html Msg
 view { groups } =
-    div [ class "group-list" ] <| List.map viewGroup groups
+    div [ class "group-list" ]
+        [ div [ class "group-list__header" ]
+            [ h2 [ onClick UserClickedSignOut ] [ text "Sign Out" ]
+            ]
+        , div [ class "group-list__content" ] <| List.map viewGroup groups
+        ]
 
 
 viewGroup : Group -> Html Msg
@@ -86,6 +115,19 @@ imageWithDefault =
 
 
 ---- API ----
+
+
+signOut : ApiConfig -> Cmd Msg
+signOut { authenticityToken } =
+    Http.request
+        { method = "DELETE"
+        , url = "/sessions"
+        , expect = Http.expectWhatever GotSignOutResponse
+        , body = Http.emptyBody
+        , headers = [ Http.header "X-CSRF-Token" authenticityToken ]
+        , timeout = Nothing
+        , tracker = Nothing
+        }
 
 
 getGroups : ApiToken -> Cmd Msg

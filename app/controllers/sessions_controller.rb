@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  before_action :require_login, only: :show
+  before_action :require_login, except: :create
 
   def show
     render json: current_user_info
@@ -14,6 +14,10 @@ class SessionsController < ApplicationController
 
     sign_in(user)
     redirect_to root_path
+  end
+
+  def destroy
+    sign_out
   end
 
   private

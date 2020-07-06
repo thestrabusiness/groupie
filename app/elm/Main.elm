@@ -220,12 +220,21 @@ view model =
 
         SignIn config ->
             { title = "Sign In"
-            , body = [ div [] [ signInLink config.clientId ] ]
+            , body =
+                [ div []
+                    [ h1 [] [ text "GroupMe" ]
+                    , signInLink config.clientId
+                    ]
+                ]
             }
 
         Loading _ ->
             { title = "Loading..."
-            , body = [ div [] [ p [] [ text "Loading..." ] ] ]
+            , body =
+                [ div []
+                    [ p [] [ text "Loading..." ]
+                    ]
+                ]
             }
 
         GroupList pageModel ->

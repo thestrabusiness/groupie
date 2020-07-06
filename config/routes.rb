@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'application#index'
 
-  resource :sessions, only: :show
+  resource :sessions, only: [:show, :destroy]
   get 'auth/callback', to: 'sessions#create'
 
   resources :groups, only: [] do
