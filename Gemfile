@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.6.5"
 
 gem "clearance"
+gem "dotenv-rails"
 gem "foreman", require: false
 gem "jbuilder", "~> 2.7"
 gem "pg", ">= 0.18", "< 2.0"
@@ -20,6 +21,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 group :development, :test do
   gem "pry"
+  gem "rspec-rails"
 end
 
 group :development do
