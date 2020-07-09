@@ -25,8 +25,8 @@ module GroupMe
 
     private
 
-    def build_group_url(access_token, page)
-      URI("#{BASE_API_URL}/groups?token=#{access_token}&page=#{page}&per_page=100")
+    def build_group_url(token, page)
+      URI("#{BASE_API_URL}/groups?token=#{token}&page=#{page}&per_page=100")
     end
   end
 end
