@@ -1,0 +1,195 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.groupme.com/v3/groups/group_id/messages?limit=100&token=token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.groupme.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'false'
+      Access-Control-Allow-Headers:
+      - Accept, Content-Type, X-Requested-With, X-Access-Token, User-Agent, Pragma,
+        Referrer, Cache-Control, Origin
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - must-revalidate, private, max-age=0
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 11 Jul 2020 19:13:47 GMT
+      Ms-Cv:
+      - pshCBAekx5kkivb7
+      Server:
+      - nginx/1.16.0
+      X-Gm-Service:
+      - authproxy-internal
+      - gm-message
+      X-Region:
+      - aws
+      Content-Length:
+      - '5319'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"response":{"count":65,"messages":[{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1590106986,"favorited_by":[],"group_id":"59829109","id":"159010698668572867","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"android-4b0df4e5-063c-49e4-a1fe-fb42b918df2a","system":false,"text":"Okey
+        doke","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1590106880,"favorited_by":[],"group_id":"59829109","id":"159010688081872512","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-ca9fed0f-0111-4ea4-aff6-6178ba38c770","system":false,"text":"My
+        power just surged. Be back in a minute ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1518x2024.jpeg.1f99c4ccd3d84e5cbad2f2fd64b9e288","created_at":1590106119,"favorited_by":[],"group_id":"59829109","id":"159010611995576663","name":"Paul
+        Bonner","sender_id":"140665","sender_type":"user","source_guid":"android-a72a84bb-71e9-4dd2-9a56-adde0639d83f","system":false,"text":"I''m
+        good thanks, been hooked on the new super mega baseball game","user_id":"140665","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1590106027,"favorited_by":[],"group_id":"59829109","id":"159010602764187226","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-e9650758-c0fb-43bd-bd6e-040e7df5563b","system":false,"text":"Likewise.
+        Want to try party chat? ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1590105999,"favorited_by":[],"group_id":"59829109","id":"159010599902681999","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"android-8563ce07-0336-42b5-8c9e-a883a05eb905","system":false,"text":"I
+        cannot hear you","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1590105967,"favorited_by":[],"group_id":"59829109","id":"159010596757608360","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-82993d50-8377-42f7-8a9a-c984d380239a","system":false,"text":"Can
+        you hear me? ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1590105660,"favorited_by":[],"group_id":"59829109","id":"159010566011778582","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"android-82071226-8243-4023-8233-334e8b827e5e","system":false,"text":"Dev
+        should be joining momentarily","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1590105653,"favorited_by":[],"group_id":"59829109","id":"159010565308166190","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"android-2f080486-5ddf-4a15-a2fa-3cc8ddafecfc","system":false,"text":"Cool
+        I''ll start a brigantine crew ","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1590105589,"favorited_by":[],"group_id":"59829109","id":"159010558955661189","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-b65751f5-734a-460b-853f-0f3757ce0d65","system":false,"text":"Cool.
+        I''ll join up","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1590105539,"favorited_by":[],"group_id":"59829109","id":"159010553910310899","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"ba7363ba8569a6d9c62f7cc8eef27ed5","system":false,"text":"i''m
+        hopping on now","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1590105486,"favorited_by":[],"group_id":"59829109","id":"159010548642379123","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-4fe93277-f474-4e4b-abcf-dbbed7ca2154","system":false,"text":"Yeah
+        I''m down. Are you starting now? ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1590105365,"favorited_by":[],"group_id":"59829109","id":"159010536519072920","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"cfecdb6fdfea27dced781b9fe50a9ed2","system":false,"text":"gonna
+        play some sea of thieves with devin if ya''ll are intersted","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":null,"created_at":1589808117,"favorited_by":[],"group_id":"59829109","id":"158980811766998677","name":"GroupMe","sender_id":"system","sender_type":"system","source_guid":"7925bd307b3801380da022000aef6a2d","system":true,"text":"Paul
+        Bonner changed the group''s avatar","user_id":"system","event":{"type":"group.avatar_change","data":{"user":{"id":140665,"nickname":"Paul
+        Bonner"},"avatar_url":"https://i.groupme.com/618x412.jpeg.7c60cfd008b649cb83cbfa14ff642746"}},"platform":"gm"},{"attachments":[],"avatar_url":null,"created_at":1589808117,"favorited_by":[],"group_id":"59829109","id":"158980811766186190","name":"GroupMe","sender_id":"system","sender_type":"system","source_guid":"79247fb07b380138dfc422000aa9c179","system":true,"text":"Paul
+        Bonner changed group type to \"open\"","user_id":"system","event":{"type":"group.type_change","data":{"user":{"id":140665,"nickname":"Paul
+        Bonner"},"type":"private"}},"platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589742461,"favorited_by":[],"group_id":"59829109","id":"158974246182502964","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"2be1c185dd2e96480e1c28ae3b3d2109","system":false,"text":"but
+        let me try something","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589742455,"favorited_by":[],"group_id":"59829109","id":"158974245574174771","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"97d7dfc2169804e4a09faba1fcd5fa70","system":false,"text":"i
+        do have it","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589742436,"favorited_by":[],"group_id":"59829109","id":"158974243683682867","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-01630468-205a-4464-af41-46c5d58a3d96","system":false,"text":"You
+        might need the xbox app for pc","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1518x2024.jpeg.1f99c4ccd3d84e5cbad2f2fd64b9e288","created_at":1589742206,"favorited_by":[],"group_id":"59829109","id":"158974220615722366","name":"Paul
+        Bonner","sender_id":"140665","sender_type":"user","source_guid":"android-d46d0d56-870b-4a89-8ce2-63f57e388558","system":false,"text":"Taking
+        it''s sweet time loading","user_id":"140665","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741577,"favorited_by":[],"group_id":"59829109","id":"158974157727290899","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"0780ade2329ac34ad900c2ef059c9cbf","system":false,"text":"huh
+        i got booted from teh session, rejoining","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741563,"favorited_by":[],"group_id":"59829109","id":"158974156329590911","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"87090b42abb87cc0e1b45369ec363f35","system":false,"text":"but
+        i have an option to change where my audio comes out","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589741556,"favorited_by":[],"group_id":"59829109","id":"158974155689943632","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-817c5d12-924b-4e8f-91cf-8f914fca0d09","system":false,"text":"Interesting.
+        Check your audio settings. I think there''s something about putting crew audio
+        through to your headset","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741548,"favorited_by":[],"group_id":"59829109","id":"158974154860537474","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"ec1a7a98c95befd41a9f7bc0a3a6789c","system":false,"text":"idk
+        how different it is on than on pc","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741538,"favorited_by":[],"group_id":"59829109","id":"158974153826564771","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"adf7413e582b4b85b0729534fe4bbdd4","system":false,"text":"there
+        might a setting to tweak","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1518x2024.jpeg.1f99c4ccd3d84e5cbad2f2fd64b9e288","created_at":1589741478,"favorited_by":[],"group_id":"59829109","id":"158974147830682867","name":"Paul
+        Bonner","sender_id":"140665","sender_type":"user","source_guid":"android-0ec53c34-f91a-4df3-9ea4-6c41dea24f9c","system":false,"text":"So
+        I could hear you guys and then I plugged in my headset and then I was not
+        able to anymore","user_id":"140665","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741469,"favorited_by":[],"group_id":"59829109","id":"158974146917571189","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"d7f1935c1a1dac22c465a40e52db7283","system":false,"text":"ok
+        great","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1518x2024.jpeg.1f99c4ccd3d84e5cbad2f2fd64b9e288","created_at":1589741175,"favorited_by":[],"group_id":"59829109","id":"158974117528962964","name":"Paul
+        Bonner","sender_id":"140665","sender_type":"user","source_guid":"android-bdcd1a82-22bd-4d78-96be-15680719f541","system":false,"text":"I
+        can hear both of you one second I''m just finishing up lunch","user_id":"140665","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741153,"favorited_by":[],"group_id":"59829109","id":"158974115303286498","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"f4202a3053790b116012b09081b25044","system":false,"text":"can
+        you hear me","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741151,"favorited_by":[],"group_id":"59829109","id":"158974115132279940","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"df2e1aca5e4d01b5f64a595a94379d26","system":false,"text":"i
+        hear you","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589741122,"favorited_by":[],"group_id":"59829109","id":"158974112245570911","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-323985f3-bae8-4532-bd24-8d481203464b","system":false,"text":"Ok
+        let''s try game chat. One sec","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741104,"favorited_by":[],"group_id":"59829109","id":"158974110492868613","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"bf02ebabacb83c2deea9df85ead4cedb","system":false,"text":"wtf","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741102,"favorited_by":[],"group_id":"59829109","id":"158974110297412744","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"6193492be5ce2b398c27d67cd7a4cb51","system":false,"text":"nope
+        don''t see it","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589741049,"favorited_by":[],"group_id":"59829109","id":"158974104956853537","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-5398e1aa-aed2-48c4-ab3e-895d5ba5bf19","system":false,"text":"What
+        about now? ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589741030,"favorited_by":[],"group_id":"59829109","id":"158974103028591189","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"ade0ca504f28c84f8e6ec42f75c44e7d","system":false,"text":"hmm
+        i dont see an invite for that chat","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589740836,"favorited_by":[],"group_id":"59829109","id":"158974083657685863","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-079c1479-1731-4a0e-9210-6c2b4f271402","system":false,"text":"Cool.
+        Sent an invite. Let me know if it doesn''t work ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740786,"favorited_by":[],"group_id":"59829109","id":"158974078646321189","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"e581cec609a9b2cd99bbe46fbd838e68","system":false,"text":"yup
+        i think so","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589740771,"favorited_by":[],"group_id":"59829109","id":"158974077142989838","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-770b4b79-0554-4eff-9017-0a4e30afe3c9","system":false,"text":"I
+        started a crew should be good to go ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589740738,"favorited_by":[],"group_id":"59829109","id":"158974073849653537","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-784e68d6-a499-4c4f-9f76-db76f2bddf15","system":false,"text":"Can
+        we do party chat if you''re on pc? ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740648,"favorited_by":[],"group_id":"59829109","id":"158974064868783537","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"e172514353aaa8f0fed20cb7a44c8185","system":false,"text":"and
+        i''ll join up","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740646,"favorited_by":[],"group_id":"59829109","id":"158974064661287837","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"a694a7bc08bd3807076b78e271e36493","system":false,"text":"start
+        a closed crew with the brigantine","user_id":"590117","platform":"gm"},{"attachments":[{"loci":[[0,13]],"type":"mentions","user_ids":["590119"]}],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740637,"favorited_by":[],"group_id":"59829109","id":"158974063750655745","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"2a106bf4a8e015c6ebb2981c87483cc2","system":false,"text":"@Noah
+        Guilmet  i added you as a friend","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740590,"favorited_by":[],"group_id":"59829109","id":"158974059097051975","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"45f80f7078d7ab11b004ae2de8f7ecbb","system":false,"text":"ok
+        i''ll hop on in a sec","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589740508,"favorited_by":[],"group_id":"59829109","id":"158974050858683632","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-49b3afae-6087-4f11-b6f1-4be6e526696b","system":false,"text":"Nice.
+        I''m good to go. Gonna hop on","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740393,"favorited_by":[],"group_id":"59829109","id":"158974039356664622","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"0868293fb4a1a4b85d67d93a8d5a82bd","system":false,"text":"we
+        can do the brigantine with the three of us","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589740385,"favorited_by":[],"group_id":"59829109","id":"158974038569877837","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"71e5015e3a8396b00580970594b34a4f","system":false,"text":"lol
+        yeah def it''ll be fun","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589740356,"favorited_by":[],"group_id":"59829109","id":"158974035649100911","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-26b17901-1cd7-45b3-809c-59b82babcc33","system":false,"text":"Def.
+        We can have up to 4 in a crew ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1518x2024.jpeg.1f99c4ccd3d84e5cbad2f2fd64b9e288","created_at":1589740262,"favorited_by":[],"group_id":"59829109","id":"158974026230857474","name":"Paul
+        Bonner","sender_id":"140665","sender_type":"user","source_guid":"android-6f431eda-f122-4a08-bf4b-82f08695739d","system":false,"text":"I''m
+        down if you guys don''t mind a noob","user_id":"140665","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589738873,"favorited_by":[],"group_id":"59829109","id":"158973887343943475","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-77bc2f8a-7379-46dd-8f64-3bba4a99951d","system":false,"text":"Yeah
+        def. On my way home now ","user_id":"590119","platform":"gm"},{"attachments":[{"loci":[[0,13]],"type":"mentions","user_ids":["590119"]}],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589738844,"favorited_by":[],"group_id":"59829109","id":"158973884448041189","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"android-c8feb11b-d9f0-4448-b161-f0000562958d","system":false,"text":"@Noah
+        Guilmet gonna hop on in 30 or so. Wanna join?","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589733030,"favorited_by":[],"group_id":"59829109","id":"158973303055236498","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"4955239bb424e821fc154f8977bf867f","system":false,"text":"yup,
+        i think it is. we played cross platform with dev''s brother last night and
+        it wourked out great","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589732993,"favorited_by":[],"group_id":"59829109","id":"158973299302482395","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-1a36233e-08fd-4760-82ea-7f5f62609299","system":false,"text":"Cool.
+        I''m cerealfingers. Haven''t tried cross platform but it should be pretty
+        straightforward ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589732931,"favorited_by":[],"group_id":"59829109","id":"158973293188028360","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"5d00b2837c7f4689ecc3ff983e3f7825","system":false,"text":"my
+        handle is TheStrabusiness","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589732926,"favorited_by":[],"group_id":"59829109","id":"158973292609080911","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"c92c4d3d49eb3d70279c9fcfeb3acb15","system":false,"text":"i''ll
+        ping ya","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589732923,"favorited_by":[],"group_id":"59829109","id":"158973292333567226","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"258f45a16569a5734ec31fd3c51f8e0f","system":false,"text":"excellent.
+        i''m gonna clean up get a couple of chores done and then im'' down to play","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589732857,"favorited_by":[],"group_id":"59829109","id":"158973285769426198","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-eec84986-cc84-42cf-b695-075ca5cc6ae7","system":false,"text":"Anyway.
+        Gonna head out to the store and then I should be good","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589731903,"favorited_by":[],"group_id":"59829109","id":"158973190378832220","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-d19da8b5-bb9c-43a3-8f9c-b65848e4e801","system":false,"text":"Nice.
+        What time do you think you''ll be on? ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589730184,"favorited_by":[],"group_id":"59829109","id":"158973018499270899","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"259b619fe39ceb4bc7e5e72667dfe185","system":false,"text":"it
+        was a glorious mess","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589730179,"favorited_by":[],"group_id":"59829109","id":"158973017937592744","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"ec828a43302a8c9829a1749fd252e3c5","system":false,"text":"and
+        we tried out the Brigantine for the first time","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589730157,"favorited_by":[],"group_id":"59829109","id":"158973015756826581","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"c8f1dbafb198d33bf4297b4d66d1f73d","system":false,"text":"i
+        played with my coworker Devin and his brother","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589729482,"favorited_by":[],"group_id":"59829109","id":"158972948204674027","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"7eb479024e9fb61a2b85153f2a51270c","system":false,"text":"cool,
+        i''m gonna play a bit this afternoon and then again this evening","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589668225,"favorited_by":[],"group_id":"59829109","id":"158966822568862744","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-98a06df7-d59a-4785-bbf9-aacbbd08f3b3","system":false,"text":"Will
+        be around all day tomorrow though ","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/480x360.gif.521561b9edc145e691d94e1e24342ae6","created_at":1589668212,"favorited_by":["590117"],"group_id":"59829109","id":"158966821208011272","name":"Noah
+        Guilmet","sender_id":"590119","sender_type":"user","source_guid":"android-9ae486e4-6cf2-4628-a745-c72655a5f7f4","system":false,"text":"I
+        can''t right now. I am foolishly breaking quarantine to have dinner with my
+        dad","user_id":"590119","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589667899,"favorited_by":[],"group_id":"59829109","id":"158966789992609940","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"acf015834a9a7568f3064f3cf8b5667e","system":false,"text":"cool
+        give me a shout","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1518x2024.jpeg.1f99c4ccd3d84e5cbad2f2fd64b9e288","created_at":1589664383,"favorited_by":[],"group_id":"59829109","id":"158966438355914771","name":"Paul
+        Bonner","sender_id":"140665","sender_type":"user","source_guid":"android-94be10d2-cc7b-4545-aec3-e24271e3c7e9","system":false,"text":"I''m
+        actually playing marvel right now with hank. I''ll let you know what I''m
+        up to in a bit though if I have time when were done","user_id":"140665","platform":"gm"},{"attachments":[],"avatar_url":"https://i.groupme.com/1248x1872.jpeg.c261f00f6849406d8d0832c009e8dad6","created_at":1589663747,"favorited_by":[],"group_id":"59829109","id":"158966374747087837","name":"Anthony
+        Moffa","sender_id":"590117","sender_type":"user","source_guid":"android-e3e9f23c-e04c-4492-8888-187c0dcd139b","system":false,"text":"Yo
+        y''all wanna play sea of thieves","user_id":"590117","platform":"gm"},{"attachments":[],"avatar_url":null,"created_at":1589663731,"favorited_by":[],"group_id":"59829109","id":"158966373163627837","name":"GroupMe","sender_id":"system","sender_type":"system","source_guid":"4c5d6d9079e80138623622000a71d1ae","system":true,"text":"Anthony
+        Moffa added Paul Bonner and Noah Guilmet to the group.","user_id":"system","event":{"type":"membership.announce.added","data":{"added_users":[{"id":140665,"nickname":"Paul
+        Bonner"},{"id":590119,"nickname":"Noah Guilmet"}],"adder_user":{"id":590117,"nickname":"Anthony
+        Moffa"}}},"platform":"gm"}]},"meta":{"code":200}}
+
+        '
+  recorded_at: Sat, 11 Jul 2020 19:13:47 GMT
+recorded_with: VCR 6.0.0

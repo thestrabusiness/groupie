@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.groupme.com/v3/groups/group_id/messages?limit=100&token=token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.groupme.com
+  response:
+    status:
+      code: 304
+      message: Redirected
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'false'
+      Access-Control-Allow-Headers:
+      - Accept, Content-Type, X-Requested-With, X-Access-Token, User-Agent, Pragma,
+        Referrer, Cache-Control, Origin
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - must-revalidate, private, max-age=0
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 11 Jul 2020 19:13:47 GMT
+      Ms-Cv:
+      - pshCBAekx5kkivb7
+      Server:
+      - nginx/1.16.0
+      X-Gm-Service:
+      - authproxy-internal
+      - gm-message
+      X-Region:
+      - aws
+      Content-Length:
+      - '5319'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Sat, 11 Jul 2020 19:13:47 GMT
+recorded_with: VCR 6.0.0
