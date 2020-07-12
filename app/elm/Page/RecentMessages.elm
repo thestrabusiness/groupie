@@ -63,10 +63,6 @@ update msg model =
                     ( { model | messages = flippedMessages }, Cmd.none )
 
                 Err error ->
-                    let
-                        _ =
-                            Debug.log "error" error
-                    in
                     ( model, Cmd.none )
 
 
