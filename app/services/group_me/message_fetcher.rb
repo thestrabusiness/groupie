@@ -1,7 +1,7 @@
 require "net/http"
 
 module GroupMe
-  class MessageFetcher < Base
+  class MessageFetcher < Api
     attr_accessor :group_id, :access_token, :options
 
     MESSAGE_LIMIT = 100
@@ -21,10 +21,10 @@ module GroupMe
       response = Net::HTTP.get_response(uri)
 
       if response.code == "200"
-        return JSON.parse(response.body)["response"]["messages"]
+        JSON.parse(response.body)["response"]["messages"]
+      else
+        []
       end
-
-      []
     end
 
     private
@@ -46,7 +46,11 @@ module GroupMe
     end
 
     def option_params
-      options.map { |param, value| "#{param}=#{value}" }
+      options.map do |param, value| 
+        next if value.nil?
+
+        "#{param}=#{value}"
+      end
     end
   end
 end

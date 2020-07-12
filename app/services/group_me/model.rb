@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module GroupMe
-  BASE_API_URL = "https://api.groupme.com/v3"
-
-  class Base
+  class Model
     attr_accessor :data
 
     def respond_to_missing?

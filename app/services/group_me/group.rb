@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module GroupMe
-  class Group < Base
+  class Group < Model
     def initialize(data)
       self.data = data
     end

@@ -3,7 +3,7 @@
 require "net/http"
 
 module GroupMe
-  class FetchGroups < Base
+  class FetchGroups < Api
     def self.perform(access_token)
       new.perform(access_token, 1, [])
     end

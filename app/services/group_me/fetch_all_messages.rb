@@ -7,7 +7,7 @@ module GroupMe
     SLEEP_DURATION = 0.5
 
     def self.perform(access_token, group_id)
-      before_id = GetLatestMessageId.perform(access_token, group_id)
+      before_id = nil
       messages = []
 
       loop do
