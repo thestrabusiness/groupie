@@ -1,6 +1,6 @@
 module Page.MostLiked exposing (Model, Msg, init, update, view)
 
-import Api exposing (ApiConfig, ApiToken)
+import Api exposing (ApiConfig)
 import Attachment exposing (Attachment(..), attachmentDecoder)
 import Html exposing (..)
 import Html.Attributes exposing (class, href, src)
@@ -10,7 +10,6 @@ import Http.Detailed
 import Json.Decode as Decode
     exposing
         ( Decoder
-        , bool
         , int
         , list
         , nullable
@@ -26,6 +25,7 @@ type alias DetailedError =
     Http.Detailed.Error String
 
 
+pageSize : Int
 pageSize =
     50
 
@@ -254,19 +254,19 @@ viewAttachment attachment =
         Image data ->
             img [ src data.url ] []
 
-        Location data ->
+        Location _ ->
             div [] [ text "Location" ]
 
-        Split data ->
+        Split _ ->
             div [] [ text "Split" ]
 
-        Emoji data ->
+        Emoji _ ->
             div [] [ text "Emoji" ]
 
-        Mention data ->
+        Mention _ ->
             div [] [ text "Mention" ]
 
-        File data ->
+        File _ ->
             div [] [ text "File" ]
 
 
@@ -427,7 +427,7 @@ secondsToPosix seconds =
 handleError : DetailedError -> Model -> ( Model, Cmd Msg )
 handleError error model =
     case error of
-        Http.Detailed.BadStatus { statusCode } body ->
+        Http.Detailed.BadStatus _ body ->
             ( { model | messageCache = Failed <| parseErrorBody body }, Cmd.none )
 
         _ ->

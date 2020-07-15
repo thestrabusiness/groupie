@@ -3,10 +3,10 @@ module Page.GroupList exposing (Model, Msg, init, update, view)
 import Api exposing (ApiConfig, ApiToken, GroupMeResponse)
 import Browser.Navigation as Navigation
 import Html exposing (..)
-import Html.Attributes exposing (class, href, method, src)
+import Html.Attributes exposing (class, href, src)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode as Decode exposing (Decoder, list, nullable, string, succeed)
+import Json.Decode exposing (Decoder, list, nullable, string, succeed)
 import Json.Decode.Pipeline exposing (required)
 import Route exposing (GroupId(..))
 

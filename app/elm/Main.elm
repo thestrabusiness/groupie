@@ -1,11 +1,10 @@
 module Main exposing (Model, Msg(..), init, main, update, view)
 
-import Api exposing (ApiConfig, ApiToken(..), ClientId(..), CurrentUser, GroupMeResponse)
+import Api exposing (ApiConfig, ApiToken(..), ClientId(..), CurrentUser)
 import Browser
 import Browser.Navigation as Navigation
 import Html exposing (..)
-import Html.Attributes exposing (href, src)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (href)
 import Http
 import Json.Decode as Decode exposing (Decoder, andThen, string, succeed)
 import Json.Decode.Pipeline exposing (required)
@@ -52,9 +51,6 @@ update msg model =
     let
         config =
             getApiConfig model
-
-        currentUser =
-            config.currentUser
     in
     case ( msg, model ) of
         ( OnUrlRequest request, _ ) ->

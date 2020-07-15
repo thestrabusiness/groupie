@@ -4,10 +4,9 @@ import Api exposing (ApiConfig, ApiToken, GroupMeResponse)
 import Attachment exposing (Attachment, attachmentDecoder)
 import Html exposing (..)
 import Html.Attributes exposing (class, href, src)
-import Html.Events exposing (onClick)
 import Http
-import Json.Decode as Decode exposing (Decoder, int, list, nullable, oneOf, string, succeed)
-import Json.Decode.Pipeline exposing (hardcoded, required, requiredAt)
+import Json.Decode exposing (Decoder, int, list, nullable, string, succeed)
+import Json.Decode.Pipeline exposing (required, requiredAt)
 import Route exposing (GroupId(..))
 
 
@@ -53,7 +52,7 @@ init config groupId =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        GotMessages groupId result ->
+        GotMessages _ result ->
             case result of
                 Ok { response } ->
                     let
@@ -62,7 +61,7 @@ update msg model =
                     in
                     ( { model | messages = flippedMessages }, Cmd.none )
 
-                Err error ->
+                Err _ ->
                     ( model, Cmd.none )
 
 

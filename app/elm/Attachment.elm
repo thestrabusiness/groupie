@@ -22,7 +22,10 @@ type alias ImageData =
 
 
 type alias LocationData =
-    { lat : String, lng : String, name : String }
+    { lat : String
+    , lng : String
+    , name : String
+    }
 
 
 type alias SplitData =
@@ -30,7 +33,9 @@ type alias SplitData =
 
 
 type alias EmojiData =
-    { placeholder : String, charMap : List (List Int) }
+    { placeholder : String
+    , charMap : List (List Int)
+    }
 
 
 type alias MentionData =

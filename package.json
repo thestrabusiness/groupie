@@ -2,7 +2,7 @@
   "name": "groupme_app",
   "private": true,
   "scripts": {
-    "lint-elm": "./node_modules/.bin/elm-format --validate app/elm/",
+    "lint-elm": "./node_modules/.bin/elm-format --validate app/elm/ && yarn elm-analyse",
     "lint-scss": "yarn stylelint **/*.scss"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "elm-analyse": "^0.16.5",
     "elm-format": "^0.8.2",
     "elm-hot-webpack-loader": "^1.1.6",
     "stylelint": "^13.5.0",
